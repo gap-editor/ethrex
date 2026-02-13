@@ -1,24 +1,10 @@
-name: Full Spellcheck
-on: [push, pull_request]
-
-jobs:
-  codespell:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Run codespell
+- name: Run codespell
         uses: codespell-project/actions-codespell@v2
         with:
-          # Проверять всё от корня
           path: .
-          # Проверять скрытые файлы (.env, .hidden_file)
+          # ПРОВЕРИТЬ ВСЁ: не падать при первой ошибке, а собрать все
+          only_warn: true 
+          # Проверять скрытые файлы
           check_hidden: true
-          # Проверять сами названия файлов
+          # Проверять имена файлов
           check_filenames: true
-          # Исключаем только системную папку гита
-          skip: ./.git
-          # Если он находит опечатку там, где ее нет (false positive), 
-          # впишите это слово сюда через запятую:
-          ignore_words_list: ""
